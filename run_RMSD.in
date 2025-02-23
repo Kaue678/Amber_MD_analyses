@@ -1,0 +1,75 @@
+trajin ../05_dinamica_Molecular/prod5ns.mdcrd
+trajin ../05_dinamica_Molecular/prod10ns.mdcrd
+trajin ../05_dinamica_Molecular/prod15ns.mdcrd
+trajin ../05_dinamica_Molecular/prod20ns.mdcrd
+trajin ../05_dinamica_Molecular/prod25ns.mdcrd
+trajin ../05_dinamica_Molecular/prod30ns.mdcrd
+trajin ../05_dinamica_Molecular/prod35ns.mdcrd
+trajin ../05_dinamica_Molecular/prod40ns.mdcrd
+trajin ../05_dinamica_Molecular/prod45ns.mdcrd
+trajin ../05_dinamica_Molecular/prod50ns.mdcrd
+trajin ../05_dinamica_Molecular/prod55ns.mdcrd
+trajin ../05_dinamica_Molecular/prod60ns.mdcrd
+trajin ../05_dinamica_Molecular/prod65ns.mdcrd
+trajin ../05_dinamica_Molecular/prod70ns.mdcrd
+trajin ../05_dinamica_Molecular/prod75ns.mdcrd
+trajin ../05_dinamica_Molecular/prod80ns.mdcrd
+trajin ../05_dinamica_Molecular/prod85ns.mdcrd
+trajin ../05_dinamica_Molecular/prod90ns.mdcrd
+trajin ../05_dinamica_Molecular/prod95ns.mdcrd
+trajin ../05_dinamica_Molecular/prod100ns.mdcrd
+
+reference ../04_aquec_equilibrio/equil10.rst
+center origin :1-274,275     			 #Residuos do complexo(proteína+ligante).
+#imager origin center :* byres familiar
+autoimage
+strip :WAT,Cl-,Na+
+
+#############################
+#### RMSD
+############################
+
+rms first :1-274@C,N,O,CA
+rms reference :1-274&@CA,C,O,N mass out 1rmsd-receptor.dat 		#Residuos da proteína(sem ligante).
+rms reference :1-274,275 mass out 2rmsd_complex.dat 
+rms reference :3-90&@CA,C,O,N mass out 3rmsd-dominio_1-3-90nubbe.dat
+rms reference :93-272&@CA,C,O,N mass out 4rmsd-dominio_2-93-272nubbe.dat
+rms reference :275 mass out 5rmsd-LIG.dat
+
+#rms reference :1-407&@CA,C,O,N mass out rms-cadeia_C.dat 
+#rms reference :408-820&@CA,C,O,N mass out rms-cadeia_D.dat 
+#rms reference :106,100,296,646,645,545,639,647,276 mass out 6rmsd_Sitio-ativo.dat 	#Resíduos do sítio ativo.
+
+#############################
+#### distancia
+############################
+rms first :1-274,275
+distance dist1 :275@O2 :35@HZ3 out dist_1-lig_O2-Lys35_HZ3.dat
+distance dist2 :275@O3 :155@H out dist_2-lig_03-Phe155_H.dat
+#distance dist3 :275@H9 :57@OE1 out dist_3-lig_H9-Glu57_OE1.dat
+#distance dist4 :275@H10 :57@OE1 out dist_4-lig_H10-Glu57_OE1.dat
+#distance dist5 :275@O5 :35@NZ out dist_5-lig_O5-Lys35_NZ.dat
+
+#distance dist6 :107@N :103@O out 4dist-107@N_103@O.dat
+#distance dist7 :107@OG1 :103@O out 5dist-107@OG1_103@O.dat
+#distance dist8 :109@N :105@O out 6dist-109@N_105@O.dat
+#distance dist9 :110@N :106@O out 7dist-110@N_1060@O.dat
+#distance dist10 :277@ND2 :391@OE1 out 8dist-277@ND2_391@OE1.dat
+
+
+###########################
+#### flutuação = RMSF
+##########################
+rms first :1-274@C,N,O,CA
+atomicfluct out fluct_receptor_backbone.dat byres :1-274@C,N,O,CA
+atomicfluct out flut_dominio_1.dat byres :3-90@C,N,O,CA
+atomicfluct out flut_dominio_2.dat byres :93-272@C,N,O,CA
+atomicfluct out flut_receptor_Heavy.dat byres !:1-274@H=
+
+#atomicfluct out flut_Sitio_cA,N,C.dat byres :106,100,296,646,645,545,639,647,276@C,N,O,CA 
+
+
+
+
+
+

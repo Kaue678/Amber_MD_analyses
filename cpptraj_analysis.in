@@ -1,0 +1,27 @@
+clear all
+parm step3_charmm2amber.parm7
+trajin reimaged.mdcrd
+autoimage
+center :1-170 mass origin
+strip :WAT,Cl-,NA+
+radgyr out raiodegiro.dat time 0.1 mass nomad
+atomicfluct out rmsf.vif.dat byres :1-170@C,N,O,CA 
+average complex-average.pdb pdb :1-171
+cluster hieragglo clusters 5 averagelinkage \
+	:1-170 \
+        summary summary.log info clusters.log \
+        cpopvtime popvtime.dat normframe time 0.1 \
+        clusterout cluster \
+	repout rep_cluster repfmt pdb
+rms first :1-170@C,N,O,CA out rmsd.vif.complete.dat time 0.1 mass 
+rms first :156-169@C,N,O,CA out rmsd.vif.pplp.dat time 0.1 mass
+rms first :35-49@C,N,O,CA out rmsd.vif.yrhhy.dat time 0.1 mass
+rms first :144-164@C,N,O,CA out rmsd.vif.socsbox.dat time 0.1 mass
+rms first :144-150@C,N,O,CA out rmsd.vif.slqyla.dat time 0.1 mass
+rms first :100-142@C,N,O,CA out rmsd.vif.hcch.dat time 0.1 mass
+rms first :11-20@C,N,O,CA out rmsd.vif.drmr.dat time 0.1 mass
+strip !:1-170@CA
+atomicfluct out bfactor.vif.complete.dat @CA,C,N,O byatom bfactor time 0.1 mass
+rms ToFirst :171&!.H= first out rmsd1.agr 
+run
+exit

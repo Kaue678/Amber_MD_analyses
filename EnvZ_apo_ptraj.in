@@ -1,0 +1,80 @@
+#cpptraj prmtop < EnvZ_apo_ptraj.in >& EnvZ_apo_ptraj.log &
+trajin min3.rst
+#trajin EnvZ_apo.md_1.x
+trajin 4KP4.md.1.x
+trajin 4KP4.md.2.x
+trajin 4KP4.md.3.x
+trajin 4KP4.md.4.x
+trajin 4KP4.md.5.x
+trajin 4KP4.md.6.x
+trajin 4KP4.md.7.x
+trajin 4KP4.md.8.x
+trajin 4KP4.md.9.x
+trajin 4KP4.md.10.x
+trajin 4KP4.md.11.x
+trajin 4KP4.md.12.x
+trajin 4KP4.md.13.x
+trajin 4KP4.md.14.x
+trajin 4KP4.md.15.x
+trajin 4KP4.md.16.x
+trajin 4KP4.md.17.x
+trajin 4KP4.md.18.x
+trajin 4KP4.md.19.x
+trajin 4KP4.md.20.x
+
+center origin :1-579
+image origin center :* byres familiar
+strip :WAT,Cl-,Na+
+       
+rms first :1-579@C,N,O,CA out 2wj2_fit.dat
+#rms first :1-218@C,N,O,CA out 2wj2_chainA_nofit.dat nofit
+#rms first :219-579@C,N,O,CA out 2wj2_chainB_nofit.dat nofit
+#rms first :152-185@C,N,O,CA out 2wj2_ATPlidA_nofit.dat nofit
+#rms first :370-403@C,N,O,CA out 2wj2_ATPlidB_nofit.dat nofit
+
+#rms first :71-579@C,N,O,CA
+#rms first :1-70@C,N,O,CA out 2wj2_DHpA_nofit.dat nofit
+#rms first :1-218,289-579@C,N,O,CA
+#rms first :219-288@C,N,O,CA out 2wj2_DHpB_nofit.dat nofit
+
+#rms first :1-80,219-579@C,N,O,CA
+#rms first :81-218@C,N,O,CA out 2wj2_ATPA_nofit.dat nofit
+#rms first :1-298@C,N,O,CA
+#rms first :299-579@C,N,O,CA out 2wj2_ATPB_nofit.dat nofit
+
+rms first :1-578@C,N,O,CA
+#rms first :14,122,125,126,127,129,130,152,155,156,157,184,185,209@C,N,O,CA out EnvZ_apo_siteA_nofit.dat nofit
+
+rms first :579 out LIG_nofit.dat nofit
+rms first :579 out LIG_fit.dat
+
+#rms first :9-17,22-28,32-47,51-63,73-77,81-86,91-100,109-126,138-141,144-148,175-179,186-202,212-221,232-242,252-257,273-279,286-290,301-303,307-312,317-324,327-329,336-338,344-349@C,N,O,CA out 2wj22_fit.dat
+#rms first :9-17,22-28,32-47,51-63,73-77,81-86@C,N,O,CA out 2wj22_chainA_nofit.dat nofit
+#rms first :91-100,109-126,138-141,144-148,175-179,186-202,212-221,232-242,252-257@C,N,O,CA out 2wj22_chainB_nofit.dat nofit
+#rms first :273-279,286-290,301-303,307-312,317-324,327-329,336-338,344-349@C,N,O,CA out 2wj22_chainC_nofit.dat nofit
+#rms first :9-17,22-28,32-47,51-63,73-77,81-86@C,N,O,CA out 2wj22_chainA_fit.dat
+#rms first :91-100,109-126,138-141,144-148,175-179,186-202,212-221,232-242,252-257@C,N,O,CA out 2wj22_chainB_fit.dat
+
+atomicfluct out fluctall.dat byres :1-579@C,N,O,CA
+atomicfluct out fluctall_Heavy.dat byres !:1-579@H=
+#rms first :219-579@C,N,O,CA
+#atomicfluct out fluctallEnvZA_apo_bb.dat byres :1-218@C,N,O,CA
+#rms first :1-218@C,N,O,CA
+#atomicfluct out fluctallEnvZB_apo_bb.dat byres :219-579@C,N,O,CA
+#rms first :90-266@C,N,O,CA
+#atomicfluct out fluctall_chainAC-2wj2.dat byres :4-89,273-365@C,N,O,CA
+#rms first :1-89@C,N,O,CA
+#atomicfluct out fluctall_chainBC-2wj2.dat byres :90-266,273-365@C,N,O,CA
+
+rms first :1-579@C,N,O,CA
+
+distance dist1 :141@N :579@O3 out distN-141_O3-579.dat
+distance dist2 :141@OG :579@O3 out distOG-141_O3-579.dat
+distance dist3 :141@OG :579@O4 out distOG-141_O4-579.dat
+#distance dist3 :29@CB,:68@CB,:72@CB :28@CB,:110@CB,:114@CB out supercombo_prova.dat
+
+#dihedral dihe3 :14@HA :14@CA :14@CB :14@CG out 3ago_10graus_TRP14_dihedral3_283.15.dat
+#dihedral dihe4 :134@HA :134@CA :134@CB :134@CG out 3ago_10graus_TRP134_dihedral4_283.15.dat
+
+go
+

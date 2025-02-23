@@ -1,0 +1,8 @@
+clear all
+parm step3_charmm2amber.parm7
+trajin prod.50ns.nc
+autoimage
+center :1-170
+trajout reimaged.mdcrd
+image center familiar
+run

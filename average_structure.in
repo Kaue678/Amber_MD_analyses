@@ -1,0 +1,6 @@
+clear all
+parm complex_new.prmtop
+trajin complex_new.mdcrd 1 50
+rms first mass @C,CA,N
+average average_structure.pdb pdb
+run
